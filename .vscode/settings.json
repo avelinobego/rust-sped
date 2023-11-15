@@ -1,0 +1,6 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "./esocial/Cargo.toml"
+    ],
+    "rust-analyzer.showUnlinkedFileNotification": false
+}

@@ -1,0 +1,7 @@
+[workspace]
+resolver = "2"
+
+members = ["esocial", "qualicadastral", "utils", "errors"]
+
+[workspace.dependencies]
+utils = {path = "utils"}
