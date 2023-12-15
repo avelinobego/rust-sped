@@ -15,22 +15,28 @@
 // You should have received a copy of the GNU General Public License
 // along with SPED.  If not, see <http://www.gnu.org/licenses/>.
 
-use std::{
-    fs::OpenOptions,
-    io::Write,
-};
+mod criar_arquivo;
+mod dto;
 
-use crate::dto::Lote;
+#[cfg(test)]
+mod tests {
+    use chrono::Local;
 
-#[allow(dead_code)]
-pub fn criar_arquivo_cqc(lote: Lote, file_name: &str) {
-    let mut f = OpenOptions::new()
-        .append(true)
-        .write(true)
-        .create(true)
-        .open(file_name)
-        .unwrap();
-    if let Err(e) = writeln!(f, "{}", lote) {
-        eprintln!("Falha! {}", e);
+    use crate::{dto::Lote, criar_arquivo::criar_arquivo_cqc};
+
+    //TODO: Apagar ou arrumar este teste
+    #[test]
+    fn test_criar() {
+        for n in 1..101 {
+            let mut dto = Lote::default();
+            dto.cpf = Some(10000000000 + n);
+            dto.nis = Some(10000000000 + n);
+            dto.nome = Some(String::from("Avelino de Almeida Bego"));
+            dto.nome_mae = Some(String::from("Maria Aparecida de Almeida Navas"));
+            dto.dn = Some(Local::now());
+            dto.uf = Some(String::from("RS"));
+
+            criar_arquivo_cqc(dto, "saida.txt");
+        }
     }
 }

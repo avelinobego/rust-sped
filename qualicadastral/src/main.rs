@@ -27,7 +27,7 @@ mod tests {
     //TODO: Apagar ou arrumar este teste
     #[test]
     fn test_criar() {
-        for n in 1..101 {
+        for n in 1..2 {
             let mut dto = Lote::default();
             dto.cpf = Some(10000000000 + n);
             dto.nis = Some(10000000000 + n);
