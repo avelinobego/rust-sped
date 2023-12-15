@@ -18,25 +18,3 @@
 mod criar_arquivo;
 mod dto;
 
-#[cfg(test)]
-mod tests {
-    use chrono::Local;
-
-    use crate::{dto::Lote, criar_arquivo::criar_arquivo_cqc};
-
-    //TODO: Apagar ou arrumar este teste
-    #[test]
-    fn test_criar() {
-        for n in 1..101 {
-            let mut dto = Lote::default();
-            dto.cpf = Some(10000000000 + n);
-            dto.nis = Some(10000000000 + n);
-            dto.nome = Some(String::from("Avelino de Almeida Bego"));
-            dto.nome_mae = Some(String::from("Maria Aparecida de Almeida Navas"));
-            dto.dn = Some(Local::now());
-            dto.uf = Some(String::from("RS"));
-
-            criar_arquivo_cqc(dto, "saida.txt");
-        }
-    }
-}
