@@ -1,4 +1,4 @@
-# SPED Fical
+# SPED Fiscal
 
 ## O que é o SPED Fiscal?
 
