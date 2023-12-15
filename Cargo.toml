@@ -1,7 +1,9 @@
 [workspace]
 resolver = "2"
 
-members = ["esocial", "qualicadastral", "utils", "errors"]
+members = ["esocial", "qualicadastral", "utils", "xml"]
 
 [workspace.dependencies]
-utils = {path = "utils"}
+utils = { path = "utils" }
+xml = { path = "xml" }
+chrono = "0.4.31"
