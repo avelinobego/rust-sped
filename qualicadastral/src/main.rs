@@ -22,7 +22,7 @@ fn main() {
 mod tests {
     use chrono::Local;
 
-    use crate::{dto::Lote, criar_arquivo::criar_arquivo_cqc};
+    use crate::dto::Lote;
 
     //TODO: Apagar ou arrumar este teste
     #[test]
@@ -36,7 +36,9 @@ mod tests {
             dto.dn = Some(Local::now());
             dto.uf = Some(String::from("RS"));
 
-            criar_arquivo_cqc(dto, "saida.txt");
+            println!("{}", dto);
+            assert_eq!("10000000001;10000000001;Avelino de Almeida Bego;15122023;RS;Maria Aparecida de Almeida Navas",
+        format!("{}", dto));
         }
     }
 }
