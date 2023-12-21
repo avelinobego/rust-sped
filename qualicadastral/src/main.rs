@@ -20,11 +20,10 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use chrono::Local;
+    use chrono::{Local, TimeZone};
 
     use crate::dto::Lote;
 
-    //TODO: Apagar ou arrumar este teste
     #[test]
     fn test_criar() {
         for n in 1..2 {
@@ -33,7 +32,7 @@ mod tests {
             dto.nis = Some(10000000000 + n);
             dto.nome = Some(String::from("Avelino de Almeida Bego"));
             dto.nome_mae = Some(String::from("Maria Aparecida de Almeida Navas"));
-            dto.dn = Some(Local::now());
+            dto.dn = Some(Local.with_ymd_and_hms(2023, 12, 15, 0, 0, 0).unwrap());
             dto.uf = Some(String::from("RS"));
 
             println!("{}", dto);
