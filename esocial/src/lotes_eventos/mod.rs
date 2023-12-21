@@ -18,3 +18,4 @@
 pub mod envio_lotes_eventos;
 pub mod retorno_envio_lote_eventos;
 pub mod status;
+pub mod ocorrencia;
