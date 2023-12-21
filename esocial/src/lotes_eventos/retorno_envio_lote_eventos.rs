@@ -22,16 +22,25 @@ use crate::{
     toxml::toxml::ToElement,
 };
 
+use super::status::Status;
+
+//TODO: Incluir status
 pub struct RetornoEnvioLoteEventos<'a> {
     ide_empregador: IdeEmpregador<'a>,
     ide_transmissor: IdeTransmissor<'a>,
+    status: Status<'a>,
 }
 
 impl<'a> RetornoEnvioLoteEventos<'a> {
-    pub fn new(ide_empregador: IdeEmpregador<'a>, ide_transmissor: IdeTransmissor<'a>) -> Self {
+    pub fn new(
+        ide_empregador: IdeEmpregador<'a>,
+        ide_transmissor: IdeTransmissor<'a>,
+        status: Status<'a>,
+    ) -> Self {
         RetornoEnvioLoteEventos {
             ide_empregador,
             ide_transmissor,
+            status,
         }
     }
 }
