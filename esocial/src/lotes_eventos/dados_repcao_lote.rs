@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with SPED.  If not, see <http://www.gnu.org/licenses/>.
 
-use chrono::{DateTime, Local, TimeZone};
+use chrono::{DateTime, Local};
 use elementtree::Element;
 
 use crate::toxml::toxml::ToElement;
@@ -56,10 +56,14 @@ impl ToElement for DadosRecepcaoLote<'_> {
 
 #[test]
 pub fn test_dados_recepcao_lote() {
+    use chrono::TimeZone;
+    
     let dh_recepcao = Local.with_ymd_and_hms(2023, 12, 20, 0, 0, 0).unwrap();
     let versao_aplicativo_recepcao = "1";
     let protocolo_envio = "000001";
     let rcplt = DadosRecepcaoLote::new(dh_recepcao, versao_aplicativo_recepcao, protocolo_envio);
 
     let dados = "<?xml version=\"1.0\" encoding=\"utf-8\"?><dadosRecepcaoLote><dhRecepcao>20231220000000</dhRecepcao><versaoAplicativoRecepcao>1</versaoAplicativoRecepcao><protocoloEnvio>000001</protocoloEnvio></dadosRecepcaoLote>";
+
+    assert_eq!(dados, rcplt.to_element().to_string().unwrap());
 }
