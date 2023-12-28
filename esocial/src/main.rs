@@ -25,6 +25,7 @@ mod identificadores;
 mod lotes_eventos;
 mod toxml;
 mod utils;
+mod constants;
 
 fn main() {
     println!("e-Social!");
