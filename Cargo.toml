@@ -7,3 +7,6 @@ members = ["esocial", "qualicadastral", "utils", "xml"]
 utils = { path = "utils" }
 xml = { path = "xml" }
 chrono = "0.4.31"
+log-panics = { version = "2", features = ["with-backtrace"] }
+simplelog = "^0.12.0"
+
