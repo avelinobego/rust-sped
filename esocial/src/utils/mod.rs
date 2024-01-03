@@ -17,4 +17,4 @@
 
 pub mod cpf;
 pub mod gerador_id;
-pub mod exec;
+pub mod functions;
