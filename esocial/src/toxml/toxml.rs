@@ -18,5 +18,28 @@
 use elementtree::Element;
 
 pub trait ToElement {
-    fn to_element(&self) -> Element;
+    fn to_element(&self) -> Option<Element> {
+        match self.validate() {
+            Ok(()) => Some(self.do_element()),
+            Err(e) => {
+                log::error!("Erro de validação: {}", e);
+                None
+            }
+        }
+    }
+
+    fn validate(&self) -> Result<(), &'static str> {
+        todo!("Implementar  validação")
+    }
+
+    fn do_element(&self) -> Element;
+}
+
+#[test]
+pub fn test_validacao() {
+    use structured_logger::Builder;
+
+    // Initialize the logger.
+    Builder::new().init();
+    log::error!("oi pessoal");
 }
