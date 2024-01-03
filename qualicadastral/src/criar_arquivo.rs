@@ -16,14 +16,10 @@
 // along with SPED.  If not, see <http://www.gnu.org/licenses/>.
 
 use std::{fs::OpenOptions, io::Write};
-
-use simplelog::{SimpleLogger, LevelFilter, Config};
-
 use crate::dto::Lote;
 
 #[allow(dead_code)]
 pub fn criar_arquivo_cqc(lote: Lote, file_name: &str) {
-    log_panics::init();
     let mut f = OpenOptions::new()
         .append(true)
         .write(true)
@@ -39,10 +35,6 @@ pub fn criar_arquivo_cqc(lote: Lote, file_name: &str) {
 pub fn test_criar() {
     use chrono::{Local, TimeZone};
     use crate::dto::Lote;
-
-    log_panics::init();
-    let _ = SimpleLogger::init(LevelFilter::Error, Config::default());
-
     for n in 1..2 {
         let mut dto = Lote::default();
         dto.cpf = Some(10000000000 + n);
