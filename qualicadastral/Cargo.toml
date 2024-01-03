@@ -8,5 +8,3 @@ edition = "2021"
 [dependencies]
 utils = { workspace = true }
 chrono = { workspace = true }
-log-panics = { workspace = true }
-simplelog = { workspace = true }

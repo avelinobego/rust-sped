@@ -8,3 +8,5 @@ edition = "2021"
 [dependencies]
 elementtree = "1.2.3"
 chrono = { workspace = true }
+log = { workspace = true }
+structured-logger = { workspace = true }
