@@ -40,7 +40,7 @@ impl<'a> IdeEmpregador<'a> {
 }
 
 impl ToElement for IdeEmpregador<'_> {
-    fn to_element(&self) -> Element {
+    fn do_element(&self) -> Element {
         let mut root = Element::new("ideEmpregador");
         let tp_insc = root.append_new_child("tpInsc");
         tp_insc.set_text(self.ide.tp_insc.to_string());
@@ -66,7 +66,7 @@ impl<'a> IdeTransmissor<'a> {
 }
 
 impl ToElement for IdeTransmissor<'_> {
-    fn to_element(&self) -> Element {
+    fn do_element(&self) -> Element {
         let mut root = Element::new("ideTransmissor");
         let tp_insc = root.append_new_child("tpInsc");
         tp_insc.set_text(self.ide.tp_insc.to_string());
