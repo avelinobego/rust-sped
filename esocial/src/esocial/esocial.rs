@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with SPED.  If not, see <http://www.gnu.org/licenses/>.
 
-use crate::{toxml::toxml::ToElement, utils::exec};
+use crate::{toxml::toxml::ToElement, utils::functions};
 use elementtree::Element;
 
 pub struct ESocial<'a, T: ToElement> {
@@ -37,7 +37,10 @@ impl<T: ToElement> ToElement for ESocial<'_, T> {
         );
 
         let mut root = Element::new((ns.as_str(), "eSocial"));
-        exec::add_child(&mut root, self.lote.to_element());
+        if let Some(e) = self.lote.to_element(){
+            root.append_child(e);
+        }
+        
         root
     }
 
