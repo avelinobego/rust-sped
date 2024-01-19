@@ -15,32 +15,31 @@
 // You should have received a copy of the GNU General Public License
 // along with SPED.  If not, see <http://www.gnu.org/licenses/>.
 
-use crate::{toxml::toxml::ToElement, utils::functions};
+use crate::toxml::toxml::ToElement;
 use elementtree::Element;
 
-pub struct ESocial<'a, T: ToElement> {
-    versao: &'a str,
-    lote: T,
+
+pub struct ESocial {
+    versao: &'static str,
+    lote: &'static dyn ToElement,
 }
 
-impl<'a, T: ToElement> ESocial<'a, T> {
-    pub fn new(versao: &'a str, lote: T) -> Self {
+impl ESocial {
+    pub fn new(versao: &'static str, lote: &'static dyn ToElement) -> Self {
         ESocial { versao, lote }
     }
 }
 
-impl<T: ToElement> ToElement for ESocial<'_, T> {
-    fn do_element(&self) -> Element {
+impl ToElement for ESocial {
+    fn to_element(&self) -> Element {
         let ns = format!(
             "http://www.esocial.gov.br/schema/lote/eventos/envio/{}/",
             self.versao
         );
 
         let mut root = Element::new((ns.as_str(), "eSocial"));
-        if let Some(e) = self.lote.to_element(){
-            root.append_child(e);
-        }
-        
+        root.append_child(self.lote.to_element());
+
         root
     }
 
@@ -56,7 +55,7 @@ fn test_esocial_xml() {
     // Builder::new().init();
 
     impl ToElement for &'static str {
-        fn do_element(&self) -> Element {
+        fn to_element(&self) -> Element {
             let mut root = Element::new("tag");
             root.set_text(*self);
             root
@@ -67,16 +66,14 @@ fn test_esocial_xml() {
         }
     }
 
-    let e = ESocial::new("v1_1_1", "teste");
+    let e = ESocial::new("v1_1_1", &"teste");
     let dado = "<?xml version=\"1.0\" encoding=\"utf-8\"?><eSocial xmlns=\"http://www.esocial.gov.br/schema/lote/eventos/envio/v1_1_1/\"><tag>teste</tag></eSocial>";
     let mut correto = false;
 
-    if let Some(ele) = e.to_element() {
-        if let Ok(s) = ele.to_string() {
-            correto = dado == s;
-        }
+    let ele = e.to_element();
+    if let Ok(s) = ele.to_string() {
+        correto = dado == s;
     }
 
     assert!(correto, "Falha no teste");
-
 }

@@ -28,7 +28,7 @@ impl S1000 {
 }
 
 impl ToElement for S1000 {
-    fn do_element(&self) -> elementtree::Element {
+    fn to_element(&self) -> elementtree::Element {
         let root = Element::new("s1000");
         root
     }

@@ -50,11 +50,11 @@ impl<'a, E: ToElement> EnvioLotesEventos<'a, E> {
 }
 
 impl<E: ToElement> ToElement for EnvioLotesEventos<'_, E> {
-    fn do_element(&self) -> Element {
+    fn to_element(&self) -> Element {
         let mut root = Element::new("envioLotesEventos");
         root.set_attr("grupo", self.grupo.to_string());
-        root.append_child(self.ide_empregador.to_element().unwrap());
-        root.append_child(self.ide_transmissor.to_element().unwrap());
+        root.append_child(self.ide_empregador.to_element());
+        root.append_child(self.ide_transmissor.to_element());
 
         let evnts = root.append_new_child("eventos");
 

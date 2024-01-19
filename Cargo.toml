@@ -9,3 +9,4 @@ xml = { path = "xml" }
 chrono = "0.4.31"
 log = "0.4"
 structured-logger = "1.0.3"
+struct_iterable = "0.1.1"

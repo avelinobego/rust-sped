@@ -18,21 +18,11 @@
 use elementtree::Element;
 
 pub trait ToElement {
-    fn to_element(&self) -> Option<Element> {
-        match self.validate() {
-            Ok(()) => Some(self.do_element()),
-            Err(e) => {
-                log::error!("Erro de validação: {}", e);
-                None
-            }
-        }
-    }
+    fn to_element(&self) -> Element;
 
     fn validate(&self) -> Result<(), &'static str> {
-        todo!("Implementar  validação")
+        Err("validação não implementada!")
     }
-
-    fn do_element(&self) -> Element;
 }
 
 #[test]
