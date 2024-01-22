@@ -1,4 +1,4 @@
-// Copyright (C) 2023 Avelino Bego
+// Copyright (C) 2024 Avelino Bego
 // 
 // This file is part of SPED.
 // 
@@ -14,8 +14,13 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with SPED.  If not, see <http://www.gnu.org/licenses/>.
-pub mod value;
-pub mod eventos;
-pub mod documento;
-pub mod tipos;
-pub mod ambiente;
+
+pub enum Ambiente {
+    Producao,
+    PreProducaoDadosReais, 
+    PreProduçaoDadosFicticios, 
+    Homologação, 
+    Validação, 
+    Testes, 
+    Desenvolvimento,    
+}
