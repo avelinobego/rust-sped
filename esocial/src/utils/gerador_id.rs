@@ -17,21 +17,21 @@
 
 use chrono::{DateTime, Local};
 
-pub struct IdEvento<'a> {
+pub struct IdEventoEmpregador<'a> {
     tipo_inscricao: &'a str,
     numero_inscricao: &'a str,
     date_time: DateTime<Local>,
     sequencial: u32,
 }
 
-impl<'a> IdEvento<'a> {
+impl<'a> IdEventoEmpregador<'a> {
     pub fn new(
         tipo_inscricao: &'a str,
         numero_inscricao: &'a str,
         date_time: DateTime<Local>,
         sequencial: u32,
     ) -> Self {
-        IdEvento {
+        IdEventoEmpregador {
             date_time,
             numero_inscricao,
             sequencial,
@@ -40,7 +40,9 @@ impl<'a> IdEvento<'a> {
     }
 }
 
-impl IdEvento<'_> {
+//TODO: criar o evento gerado pelo e-Social
+
+impl IdEventoEmpregador<'_> {
     pub fn to_id(&self) -> String {
         let s_data_time = self.date_time.format("%Y%m%d%H%M%S");
         let s_numero_inscricao = format!("{0:0<14}", self.numero_inscricao);
@@ -57,7 +59,7 @@ fn test_gerar_id() {
     use chrono::TimeZone;
 
     let now = Local.with_ymd_and_hms(2023, 12, 10, 18, 37, 59).unwrap();
-    let id_evento = IdEvento::new("1", "0426001000138", now, 1);
+    let id_evento = IdEventoEmpregador::new("1", "0426001000138", now, 1);
 
     let result = id_evento.to_id();
     println!("{result}");
