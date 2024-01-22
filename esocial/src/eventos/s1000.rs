@@ -32,4 +32,8 @@ impl ToElement for S1000 {
         let root = Element::new("s1000");
         root
     }
+
+    fn validate(&self) -> Result<(), &'static str> {
+        todo!()
+    }
 }

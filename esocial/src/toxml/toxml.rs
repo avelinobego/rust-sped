@@ -19,10 +19,7 @@ use elementtree::Element;
 
 pub trait ToElement {
     fn to_element(&self) -> Element;
-
-    fn validate(&self) -> Result<(), &'static str> {
-        Err("validação não implementada!")
-    }
+    fn validate(&self) -> Result<(), &'static str>;
 }
 
 #[test]

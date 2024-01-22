@@ -48,6 +48,10 @@ impl ToElement for IdeEmpregador<'_> {
         nr_insc.set_text(self.ide.nr_insc);
         root
     }
+
+    fn validate(&self) -> Result<(), &'static str> {
+        todo!()
+    }
 }
 // --------------------------------------------------
 pub struct IdeTransmissor<'a> {
@@ -74,5 +78,13 @@ impl ToElement for IdeTransmissor<'_> {
         nr_insc.set_text(self.ide.nr_insc);
         root
     }
+
+    fn validate(&self) -> Result<(), &'static str> {
+        todo!()
+    }
 }
 // --------------------------------------------------
+
+pub struct IdEvento {
+    
+}
