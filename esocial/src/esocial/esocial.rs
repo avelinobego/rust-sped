@@ -15,27 +15,32 @@
 // You should have received a copy of the GNU General Public License
 // along with SPED.  If not, see <http://www.gnu.org/licenses/>.
 
+use std::ops::{Range, RangeFrom};
+
 use crate::toxml::toxml::ToElement;
 use elementtree::Element;
 
-
 pub struct ESocial {
-    versao: &'static str,
+    complemento: String,
     lote: &'static dyn ToElement,
 }
 
 impl ESocial {
-    pub fn new(versao: &'static str, lote: &'static dyn ToElement) -> Self {
-        ESocial { versao, lote }
+    pub fn new(complemento: &'static str, lote: &'static dyn ToElement) -> Self {
+        let mut temp = String::from(complemento);
+        if temp.starts_with("/") {
+            temp.remove(0);
+        }
+        Self {
+            complemento: temp,
+            lote,
+        }
     }
 }
 
 impl ToElement for ESocial {
     fn to_element(&self) -> Element {
-        let ns = format!(
-            "http://www.esocial.gov.br/schema/lote/eventos/envio/{}/",
-            self.versao
-        );
+        let ns = format!("http://www.esocial.gov.br/schema/{}", self.complemento);
 
         let mut root = Element::new((ns.as_str(), "eSocial"));
         root.append_child(self.lote.to_element());
@@ -46,6 +51,15 @@ impl ToElement for ESocial {
     fn validate(&self) -> Result<(), &'static str> {
         Ok(())
     }
+}
+
+#[test]
+fn test_retain() {
+    let mut s = String::from("comeco/meio/fim");
+    if s.starts_with("/") {
+        s.remove(0);
+    }
+    println!("{}", s);
 }
 
 #[test]
@@ -66,7 +80,7 @@ fn test_esocial_xml() {
         }
     }
 
-    let e = ESocial::new("v1_1_1", &"teste");
+    let e = ESocial::new("/lote/eventos/envio/v1_1_1/", &"teste");
     let dado = "<?xml version=\"1.0\" encoding=\"utf-8\"?><eSocial xmlns=\"http://www.esocial.gov.br/schema/lote/eventos/envio/v1_1_1/\"><tag>teste</tag></eSocial>";
     let mut correto = false;
 

@@ -27,7 +27,7 @@ pub struct EnvioLotesEventos<'a, E: ToElement> {
     grupo: i32,
     ide_empregador: IdeEmpregador<'a>,
     ide_transmissor: IdeTransmissor<'a>,
-    eventos: Vec<Eventos<E>>,
+    eventos: Vec<Eventos<'a, E>>,
 }
 
 impl<'a, E: ToElement> EnvioLotesEventos<'a, E> {
@@ -44,7 +44,7 @@ impl<'a, E: ToElement> EnvioLotesEventos<'a, E> {
         }
     }
 
-    pub fn add_evento(&mut self, evento: Eventos<E>) {
+    pub  fn add_evento(&mut self, evento: Eventos<'a, E>) {
         self.eventos.push(evento);
     }
 }
@@ -62,7 +62,9 @@ impl<E: ToElement> ToElement for EnvioLotesEventos<'_, E> {
             .iter()
             .map(|e| {
                 let mut result = Element::new("evento");
-                result.set_attr("Id", e.id().to_string());
+                let evento = e.to_element();
+                result.set_attr("Id", evento.get_attr("Id").unwrap());
+                result.append_child(e.to_element());
                 result
             })
             .for_each(|e| {
@@ -70,6 +72,10 @@ impl<E: ToElement> ToElement for EnvioLotesEventos<'_, E> {
             });
 
         root
+    }
+
+    fn validate(&self) -> Result<(), &'static str> {
+        todo!()
     }
 }
 // --------------------------------------------------
