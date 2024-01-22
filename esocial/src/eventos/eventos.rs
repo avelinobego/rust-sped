@@ -15,21 +15,41 @@
 // You should have received a copy of the GNU General Public License
 // along with SPED.  If not, see <http://www.gnu.org/licenses/>.
 
-use crate::toxml::toxml::ToElement;
+use elementtree::Element;
 
-pub struct Eventos<E: ToElement> {
-    id: i64,
+use crate::{
+    identificadores::ide::IdeEmpregador, toxml::toxml::ToElement, constants::tipos::TipoEventos,
+};
+
+
+pub struct Eventos<'a, E: ToElement> {
+    name: String,
+    id: String,
+    // id_evento: IdEventoEmpregador,
+    id_empregador: IdeEmpregador<'a>,
     evento: E,
 }
 
-impl<E: ToElement> Eventos<E> {
-    pub fn id(&self) -> i64 {
-        self.id
+impl<'a, E: ToElement> Eventos<'a, E> {
+    pub fn new(tipo: TipoEventos, id: String, id_empregador: IdeEmpregador<'a>, evento: E) -> Self {
+        Self {
+            name: tipo.to_name(),
+            id,
+            id_empregador,
+            evento,
+        }
     }
 }
 
-impl<E: ToElement> Eventos<E> {
-    pub fn new(id: i64, evento: E) -> Self {
-        Eventos { id, evento }
+impl<'a, E: ToElement> ToElement for Eventos<'a, E> {
+    fn to_element(&self) -> elementtree::Element {
+        let mut root = Element::new("evento");
+        root.append_child(self.evento.to_element());
+        root
+    }
+
+    fn validate(&self) -> Result<(), &'static str> {
+        todo!()
     }
 }
+
