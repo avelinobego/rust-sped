@@ -19,3 +19,4 @@ pub mod eventos;
 pub mod documento;
 pub mod tipos;
 pub mod ambiente;
+pub mod origem;

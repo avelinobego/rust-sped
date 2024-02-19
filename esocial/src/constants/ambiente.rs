@@ -16,10 +16,10 @@
 // along with SPED.  If not, see <http://www.gnu.org/licenses/>.
 
 pub enum Ambiente {
-    Producao,
+    Producao = 1,
     PreProducaoDadosReais, 
     PreProduçaoDadosFicticios, 
-    Homologação, 
+    Homologação = 6, 
     Validação, 
     Testes, 
     Desenvolvimento,    
