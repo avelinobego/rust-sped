@@ -1,3 +1,9 @@
+use std::fmt::{Display, Error};
+
+use log::as_error;
+
+use crate::toxml::toxml::ToElement;
+
 // Copyright (C) 2024 Avelino Bego
 //
 // This file is part of SPED.
@@ -14,6 +20,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with SPED.  If not, see <http://www.gnu.org/licenses/>.
+
 #[derive(Debug)]
 pub enum TipoEventos {
     EvtAdmPrelim,
@@ -67,20 +74,16 @@ pub enum TipoEventos {
 }
 
 impl TipoEventos {
-    pub fn nome_evento(&self) -> String {
+    pub fn to_name(&self) -> String {
         let temp = format!("{:?}", self);
-        temp.replacen("E", "e", 1)
-    }
-
-    pub fn nome_info(&self) -> String {
-        let temp = format!("{:?}", self);
-        temp.replacen("Evt", "info", 3)
+        let mut cs = temp.chars();
+        cs.next().unwrap().to_lowercase().collect::<String>() + cs.as_str()
     }
 }
+
 
 #[test]
 fn test_to_string() {
     let t = TipoEventos::EvtAdmissao;
-    assert_eq!("evtAdmissao", t.nome_evento());
-    assert_eq!("infoAdmissao", t.nome_info());
+    assert_eq!("evtAdmissao", t.to_name())
 }

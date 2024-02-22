@@ -1,12 +1,17 @@
 [workspace]
 resolver = "2"
 
-members = ["esocial", "qualicadastral", "utils", "xml"]
+members = ["esocial", "qualicadastral", "utils", "macros"]
 
 [workspace.dependencies]
 utils = { path = "utils" }
 xml = { path = "xml" }
+macros ={ path = "macros"}
 chrono = "0.4.31"
 log = "0.4"
 structured-logger = "1.0.3"
 struct_iterable = "0.1.1"
+elementtree = "1.2.3"
+quote = "1.0.35"
+syn = { features = ["full"], version = "2.0.49"}
+
