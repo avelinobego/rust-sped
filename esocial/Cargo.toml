@@ -4,9 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-serde = { workspace = true }
-quick-xml = { workspace = true }
 chrono = { workspace = true }
 pad = { workspace = true }
 regex = { workspace = true }
-serde_with = { workspace = true }
+yaserde = { workspace = true }
