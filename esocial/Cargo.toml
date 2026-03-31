@@ -7,4 +7,5 @@ edition = "2024"
 chrono = { workspace = true }
 pad = { workspace = true }
 regex = { workspace = true }
-yaserde = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+quick-xml = { workspace = true, features = ["serialize"] }
