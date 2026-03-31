@@ -1,3 +1,7 @@
+pub mod domain;
+
+use esocial::hello;
+
 fn main() {
-    println!("Hello, world!");
+    hello!("World");
 }
